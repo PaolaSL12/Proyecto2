@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;900&display=swap');
+
 :root {
   --mc-primary-color:#F6F4F4;
   --mc-secondary-color: #3F3F3B;
@@ -25,3 +27,161 @@
   --mc-br:10px;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  list-style: none;
+  background-color: var(--mc-primary-color);
+  color: var(--mc-secondary-color);
+}
+
+header {
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--mc-base-color);
+}
+
+h1 {
+  font-size: 3em;
+  padding-left: var(--mc-padding-l);
+  color: var(--mc-primary-color);
+  background-color: var(--mc-base-color);
+}
+
+header > nav {
+  width: 55%;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  background-color: var(--mc-base-color);
+  margin-right: var(--mc-margin-l);
+}
+
+header > nav > ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--mc-base-color);
+}
+
+a {
+  font-size: 1.4em;
+  font-weight: 400;
+  background-color: var(--mc-base-color);
+  color: var(--mc-primary-color);
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--mc-special-color1);
+}
+
+.menu {
+  display: none;
+}
+
+
+nav > div {
+  width: 40px;
+  height: 40px;
+  background-color: var(--mc-base-color);
+}
+
+nav > div > img {
+  width: 100%;
+  object-fit: contain;
+  background-color: var(--mc-base-color);
+}
+
+main {
+  display: flex;
+}
+
+.filter {
+  width: 20%;
+}
+
+.products {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+  gap: var(--mc-gap-xl);
+  margin: var(--mc-margin-xl);
+}
+
+.cardProduct {
+  width: 270px;
+  height: 350px;
+  border-radius: var(--mc-br);
+  box-shadow: 1px 0px 28px 3px rgba(63,63,59,0.35);
+  transition: all .2s ease-in-out;
+}
+
+.cardProduct:hover {
+  transform: scale(1.1)
+}
+
+.imgProduct {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: var(--mc-margin-s) auto;
+  height: 70%;
+  background-color: white;
+
+}
+
+.imgProduct > img {
+  width: 100%;
+  object-fit: contain;
+ 
+}
+
+.divCardContent {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--mc-padding-s);
+}
+
+@media screen and (max-width: 720px) {
+  header > nav {
+    justify-content:end;
+  }
+
+  h1 {
+    font-size: 2em;
+    padding-left: var(--mc-padding-m);
+  }
+
+  header > nav > ul {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+  }
+}
+
+@media screen and (min-width:721px) and (max-width: 1200px) {
+  a {
+    font-size: 1em;
+  }
+  h1 {
+    font-size: 2em;
+    padding-left: var(--mc-padding-m);
+  }
+  header > nav {
+    margin-right: var(--mc-margin-m);
+  }
+  
+}
