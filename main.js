@@ -189,7 +189,9 @@ main.append(sectionFilter);
 
 const sectionProducts = document.createElement("section");
 sectionProducts.className = "products";
-main.append(sectionProducts);
+main.append(sectionProducts); 
+
+
 
 const filterSelect = () => {
   const filtered = [];
@@ -211,8 +213,6 @@ const fillSeller = (prod) => {
     }
   }
 };
-
-fillSeller(products);
 
 const createSelect = () => {
   const select = document.createElement("select");
@@ -248,14 +248,13 @@ const createImputPrice = () => {
   input.id = "numInput";
   label.htmlFor = input.id;
   h3.textContent = "Filtro de Precio:";
-  button.textContent = "Buscar";
+  button.textContent = "Buscar Precio";
   button.className = "search";
 
   button.addEventListener("click", () => {
     if(!buttonvalue.includes(input.value)) {
       buttonvalue = input.value
     }
-  
     
     createPriceFilter()
   });
@@ -265,7 +264,6 @@ const createImputPrice = () => {
   sectionFilter.append(input);
   sectionFilter.append(button);
 };
-
 
 const createPriceFilter = ()  => {
   const filteredPrice = [];
@@ -284,6 +282,7 @@ const createPriceFilter = ()  => {
   
   
 }
+
 
 const printProducts = (elements) => {
   sectionProducts.innerHTML = "";
@@ -328,6 +327,27 @@ const printProducts = (elements) => {
   });
 };
 
+fillSeller(products);
+createSelect();
 printProducts(products);
 createImputPrice();
-createSelect();
+
+
+const cleanfiltersButton = document.createElement("button");
+cleanfiltersButton.textContent = "Limpiar Filtros";
+cleanfiltersButton.className = "clean";
+sectionFilter.appendChild(cleanfiltersButton);
+
+const cleanButton = () => {
+
+  const select = document.querySelector("select");
+  const input = document.querySelector("#numInput");
+  
+  cleanfiltersButton.addEventListener("click", () => {
+    printProducts(products)
+    select.value = "";
+    input.value = "";
+  })
+}
+
+cleanButton()
