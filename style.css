@@ -19,12 +19,13 @@
   --mc-padding-xl:40px;
   --mc-padding-xxl:50px;
 
+  --mc-gap-xs:5px;
   --mc-gap-s:10px;
   --mc-gap-m:20px;
   --mc-gap-l:30px;
   --mc-gap-xl:40px;
 
-  --mc-br:10px;
+  --mc-br:5px;
 }
 
 * {
@@ -119,15 +120,16 @@ main {
 }
 
 .cardProduct {
-  width: 270px;
-  height: 350px;
+  width: 280px;
+  height: 370px;
   border-radius: var(--mc-br);
-  box-shadow: 1px 0px 28px 3px rgba(63,63,59,0.35);
+  box-shadow: 1px 0px 20px 3px rgba(63,63,59,0.25);
   transition: all .2s ease-in-out;
+  position: relative;
 }
 
 .cardProduct:hover {
-  transform: scale(1.1)
+  transform: scale(1.1);
 }
 
 .imgProduct {
@@ -136,7 +138,7 @@ main {
   align-items: center;
   width: 80%;
   margin: var(--mc-margin-s) auto;
-  height: 70%;
+  height: 65%;
   background-color: white;
 
 }
@@ -149,8 +151,69 @@ main {
 
 .divCardContent {
   display: flex;
+  justify-content: space-between;
+  height: 90px;
   flex-direction: column;
   padding: 0 var(--mc-padding-s);
+}
+
+.divCardContent > p {
+  color: var(--mc-special-color2);
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.stars {
+  display: flex;
+  gap: var(--mc-gap-xs);
+}
+
+.star {
+  width: 20px;
+  height: 20px;
+  background-color:#3f3f3b48;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.filled {
+  background-color: var(--mc-special-color1);
+}
+
+button {
+  border-radius: var(--mc-br);
+  border: 2px solid var(--mc-base-color);
+  color: var(--mc-base-color);
+  font-size: 1em;
+  width: 100px;
+  height: 25px;
+  background-color: var(--mc-primary-color);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.cardButton {
+  position: absolute;
+  bottom: 18px;
+  right: 20px;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.filter {
+  margin: var(--mc-margin-l);
+}
+
+.filter > select, .filter > input {
+  width: 100%;
+  height: 35px;
+  border-radius: var(--mc-br);
+  font-weight: 500;
+}
+
+.filter > select > option {
+  font-weight: 500;
 }
 
 @media screen and (max-width: 720px) {

@@ -19,7 +19,7 @@ const products = [
   },
 
   {
-    name: "Land Rover Largo Serie III",
+    name: "Land Rover Largo S.III",
     price: 43.06,
     stars: 4,
     brand: "REVELL",
@@ -156,6 +156,12 @@ const products = [
   },
 ];
 
+const SELLERS = [];
+
+let SELLER = "";
+
+let buttonvalue = ""
+
 const header = document.createElement("header");
 
 const h1 = document.createElement("h1");
@@ -185,46 +191,143 @@ const sectionProducts = document.createElement("section");
 sectionProducts.className = "products";
 main.append(sectionProducts);
 
-const printProducts = () => {
-  sectionProducts.innerHTML = "";
+const filterSelect = () => {
+  const filtered = [];
+
+  for (const product of products) {
+    if (SELLER.includes(product.seller)) {
+      filtered.push(product);
+    }
+  }
+
+  printProducts(filtered);
+};
+
+const fillSeller = (prod) => {
+  SELLERS.splice(0);
+  for (const pro of prod) {
+    if (!SELLERS.includes(pro.seller)) {
+      SELLERS.push(pro.seller);
+    }
+  }
+};
+
+fillSeller(products);
+
+const createSelect = () => {
+  const select = document.createElement("select");
+
+  for (const seller of SELLERS) {
+    const option = document.createElement("option");
+
+    option.value = seller;
+    option.textContent = seller;
+
+    select.append(option);
+  }
+
+  sectionFilter.append(select);
+
+  select.addEventListener("change", (event) => {
+    SELLER = event.target.value;
+    filterSelect();
+  });
+
+  const sellerFiltertext = document.createElement("h3");
+  sellerFiltertext.textContent = "Filtrar Vendedor:";
+  sectionFilter.insertBefore(sellerFiltertext, select);
+};
+
+const createImputPrice = () => {
+  const label = document.createElement("label");
+  const h3 = document.createElement("h3");
+  const input = document.createElement("input");
+  const button = document.createElement("button");
+
+  input.type = "number";
+  input.id = "numInput";
+  label.htmlFor = input.id;
+  h3.textContent = "Filtro de Precio:";
+  button.textContent = "Buscar";
+  button.className = "search";
+
+  button.addEventListener("click", () => {
+    if(!buttonvalue.includes(input.value)) {
+      buttonvalue = input.value
+    }
   
-  products.forEach((product) => {
+    
+    createPriceFilter()
+  });
+
+  label.append(h3);
+  sectionFilter.append(label);
+  sectionFilter.append(input);
+  sectionFilter.append(button);
+};
+
+
+const createPriceFilter = ()  => {
+  const filteredPrice = [];
+
+  for (const product of products) {
+    if (product.price <= buttonvalue) {
+      filteredPrice.push(product);
+      
+      printProducts(filteredPrice);
+    } else {
+      printProducts(filteredPrice);
+     
+    }
+
+  }
+  
+  
+}
+
+const printProducts = (elements) => {
+  sectionProducts.innerHTML = "";
+
+  elements.forEach((element) => {
     const divProduct = document.createElement("div");
-    divProduct.className = "cardProduct"
+    divProduct.className = "cardProduct";
     const divImg = document.createElement("div");
     const img = document.createElement("img");
     const divContentCard = document.createElement("div");
     const nameProduct = document.createElement("h3");
     const priceProduct = document.createElement("p");
     const divstars = document.createElement("div");
+    const button = document.createElement("button");
 
-    for (let i = 0; i <= 5 ; i++) {
+    for (let i = 1; i <= 5; i++) {
       const star = document.createElement("div");
       star.className = "star";
-
-      if (i <= product.stars) {
-        star.classList.add = ("filled");
+      if (i <= element.stars) {
+        star.classList.add("filled");
       }
-      divstars.append(star);
+      divstars.appendChild(star);
     }
 
     divImg.className = "imgProduct";
-    divContentCard.className = "divCardContent"
+    divContentCard.className = "divCardContent";
     divstars.className = "stars";
-    img.src = product.image;
-    nameProduct.textContent = product.name;
-    priceProduct.textContent = `${product.price} €`;
+    img.src = element.image;
+    nameProduct.textContent = element.name;
+    priceProduct.textContent = `${element.price} €`;
+    button.textContent = "Comprar";
+    button.className = "cardButton";
 
     divProduct.append(divImg);
     divImg.append(img);
     divContentCard.append(nameProduct);
     divContentCard.append(priceProduct);
     divContentCard.append(divstars);
+    divContentCard.append(button);
     divProduct.append(divContentCard);
     sectionProducts.append(divProduct);
-  })
- 
-}
+  });
+};
 
-printProducts();
-
+printProducts(products);
+createImputPrice();
+createSelect();
