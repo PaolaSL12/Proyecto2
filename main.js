@@ -173,7 +173,8 @@ nav.innerHTML = `<ul>
   <li><a href="#">Pinturas</a></li>
   <li><a href="#">Herramientas</a></li>
   <li><a href="#">Novedades</a></li>
-  </ul>`;
+  </ul>
+  <div class="menu"><img src="./assets/paint-brushes.png" alt="menu"></div>`;
 
 header.append(h1);
 header.append(nav);
