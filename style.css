@@ -84,22 +84,6 @@ a:hover {
   color: var(--mc-special-color1);
 }
 
-.menu {
-  display: none;
-}
-
-
-nav > div {
-  width: 40px;
-  height: 40px;
-  background-color: var(--mc-base-color);
-}
-
-nav > div > img {
-  width: 100%;
-  object-fit: contain;
-  background-color: var(--mc-base-color);
-}
 
 main {
   display: flex;
