@@ -224,6 +224,7 @@ const createSelect = () => {
   }
 
   sectionFilter.append(select);
+  select.value ="";
 
   select.addEventListener("change", (event) => {
     SELLER = event.target.value;
@@ -253,7 +254,6 @@ const createImputPrice = () => {
     if(!buttonvalue.includes(input.value)) {
       buttonvalue = input.value
     }
-    
     filters()
   });
 
@@ -264,12 +264,11 @@ const createImputPrice = () => {
 };
 
 
-
-
 const filters = () => {
+
   const filterproducts = [];
   for (const product of products) {
-    if ((SELLER.includes(product.seller)) && (product.price <= buttonvalue)) {
+    if ((SELLER.includes(product.seller)) && (product.price <= (buttonvalue || 100))) {
       filterproducts.push(product)
     } 
   }
@@ -277,11 +276,13 @@ const filters = () => {
   if (filterproducts.length >= 1) {
     printProducts(filterproducts)
   } else {
+    printProducts(filterproducts)
     alert("lo sentimos, no tenemos productos que cumplan esos filtros 😐")
-    clean()
+    clean();
   }
-
 }
+
+  
 
 const printProducts = (elements) => {
   sectionProducts.innerHTML = "";
