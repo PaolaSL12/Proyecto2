@@ -191,7 +191,6 @@ sectionProducts.className = "products";
 main.append(sectionProducts); 
 
 
-
 const filterSelect = () => {
   const filtered = [];
 
@@ -200,8 +199,7 @@ const filterSelect = () => {
       filtered.push(product);
     }
   }
-
-  printProducts(filtered);
+  
 };
 
 const fillSeller = (prod) => {
@@ -247,15 +245,16 @@ const createImputPrice = () => {
   input.id = "numInput";
   label.htmlFor = input.id;
   h3.textContent = "Filtro de Precio:";
-  button.textContent = "Buscar Precio";
+  button.textContent = "Buscar";
   button.className = "search";
+
 
   button.addEventListener("click", () => {
     if(!buttonvalue.includes(input.value)) {
       buttonvalue = input.value
     }
     
-    createPriceFilter()
+    filters()
   });
 
   label.append(h3);
@@ -264,24 +263,25 @@ const createImputPrice = () => {
   sectionFilter.append(button);
 };
 
-const createPriceFilter = ()  => {
-  const filteredPrice = [];
 
+
+
+const filters = () => {
+  const filterproducts = [];
   for (const product of products) {
-    if (product.price <= buttonvalue) {
-      filteredPrice.push(product);
-      
-      printProducts(filteredPrice);
-    } else {
-      printProducts(filteredPrice);
-     
-    }
-
+    if ((SELLER.includes(product.seller)) && (product.price <= buttonvalue)) {
+      filterproducts.push(product)
+    } 
   }
-  
-  
-}
+ 
+  if (filterproducts.length >= 1) {
+    printProducts(filterproducts)
+  } else {
+    alert("lo sentimos, no tenemos productos que cumplan esos filtros 😐")
+    clean()
+  }
 
+}
 
 const printProducts = (elements) => {
   sectionProducts.innerHTML = "";
@@ -337,15 +337,17 @@ cleanfiltersButton.textContent = "Limpiar Filtros";
 cleanfiltersButton.className = "clean";
 sectionFilter.appendChild(cleanfiltersButton);
 
-const cleanButton = () => {
-
+const clean = () => {
   const select = document.querySelector("select");
   const input = document.querySelector("#numInput");
-  
+  select.value = "";
+  input.value = "";
+}
+
+const cleanButton = () => {
   cleanfiltersButton.addEventListener("click", () => {
     printProducts(products)
-    select.value = "";
-    input.value = "";
+    clean()
   })
 }
 
