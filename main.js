@@ -255,6 +255,7 @@ const createImputPrice = () => {
       buttonvalue = input.value
     }
     filters()
+    buttonvalue = "";
   });
 
   label.append(h3);
@@ -278,7 +279,6 @@ const filters = () => {
   } else {
     printProducts(filterproducts)
     alert("lo sentimos, no tenemos productos que cumplan esos filtros 😐")
-    clean();
   }
 }
 
