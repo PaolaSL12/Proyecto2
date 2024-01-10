@@ -190,18 +190,6 @@ const sectionProducts = document.createElement("section");
 sectionProducts.className = "products";
 main.append(sectionProducts); 
 
-
-const filterSelect = () => {
-  const filtered = [];
-
-  for (const product of products) {
-    if (SELLER.includes(product.seller)) {
-      filtered.push(product);
-    }
-  }
-  
-};
-
 const fillSeller = (prod) => {
   SELLERS.splice(0);
   for (const pro of prod) {
@@ -213,10 +201,16 @@ const fillSeller = (prod) => {
 
 const createSelect = () => {
   const select = document.createElement("select");
+  const defaultoption = document.createElement("option");
+  defaultoption.textContent = "Todos los vendedores";
+  defaultoption.value = "todos";
+  defaultoption.selected = true
 
+  select.append(defaultoption);
+ 
   for (const seller of SELLERS) {
     const option = document.createElement("option");
-
+  
     option.value = seller;
     option.textContent = seller;
 
@@ -224,11 +218,11 @@ const createSelect = () => {
   }
 
   sectionFilter.append(select);
-  select.value ="";
 
+  select.value = defaultoption
   select.addEventListener("change", (event) => {
     SELLER = event.target.value;
-    filterSelect();
+    filters();
   });
 
   const sellerFiltertext = document.createElement("h3");
@@ -265,24 +259,42 @@ const createImputPrice = () => {
 };
 
 
+
 const filters = () => {
 
-  const filterproducts = [];
-  for (const product of products) {
-    if ((SELLER.includes(product.seller)) && (product.price <= (buttonvalue || 100))) {
-      filterproducts.push(product)
-    } 
+  let filtered = []
+  let pricefilter = []
+
+  if (SELLER === "") {
+    return alert("Por favor seleccione un filtro de vendedor")
   }
+  
+      for (const product of products) {
+        
+        if (SELLER.includes(product.seller)) {
+          filtered.push(product);
+        }
+        if (SELLER === "todos") {
+          filtered.push(product)  
+        }
+      }
+   
+    printProducts(filtered);
  
-  if (filterproducts.length >= 1) {
-    printProducts(filterproducts)
+    for (const fitred of filtered) {
+      if (SELLER && fitred.price <= (buttonvalue || 100)) {
+        pricefilter.push(fitred);
+      }
+    }
+    
+
+  if (pricefilter.length >= 1) {
+    printProducts(pricefilter)
   } else {
-    printProducts(filterproducts)
+    printProducts(pricefilter)
     alert("lo sentimos, no tenemos productos que cumplan esos filtros 😐")
   }
 }
-
-  
 
 const printProducts = (elements) => {
   sectionProducts.innerHTML = "";
@@ -338,17 +350,19 @@ cleanfiltersButton.textContent = "Limpiar Filtros";
 cleanfiltersButton.className = "clean";
 sectionFilter.appendChild(cleanfiltersButton);
 
-const clean = () => {
+const cleanFilters = () => {
   const select = document.querySelector("select");
   const input = document.querySelector("#numInput");
-  select.value = "";
   input.value = "";
+  select.value = "";
+  console.log(select.value);
 }
+
 
 const cleanButton = () => {
   cleanfiltersButton.addEventListener("click", () => {
+    cleanFilters()
     printProducts(products)
-    clean()
   })
 }
 
