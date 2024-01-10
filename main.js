@@ -355,6 +355,7 @@ const cleanFilters = () => {
   const input = document.querySelector("#numInput");
   input.value = "";
   select.value = "";
+  SELLER = "";
   console.log(select.value);
 }
 
